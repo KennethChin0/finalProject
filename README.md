@@ -20,10 +20,11 @@ get the word before the drawing is done, they win.
 
 
 ## Technical Design:
+- Allocated Memory: Store the words and guess letters.
 - Networking: Allow two (or more tbd) players to play against each other.
 - Signals: To relay the what letters the guessers guess and what the word is.
 - Share Memory/ Semaphores: Only one guesser can go at a time.
-- Allocated Memory: Store the words and guess letters.
+
 
 ## Timeline:
 January 6 - Figure out networking/ get communication between 2 players.  
