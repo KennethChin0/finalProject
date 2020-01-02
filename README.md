@@ -10,7 +10,8 @@ We are making our attempt of creating the popular child's game hangman.
 The objective of the game is to guess a word that someone else chooses. The
 guessers guess a letter each turn. If the letter is part of the word, the
 position the letter is in the word is shown, else a part of a drawing of a stick 
-figure is drawn. If the guesser can get the word before the drawing is done, they win.
+figure is drawn (representative of certain number of lives). If the guesser can
+get the word before the drawing is done, they win.
 
 ## Description of User Interface:  
 - There is an option to choose to be the guesser or chooser.
