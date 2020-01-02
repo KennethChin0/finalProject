@@ -18,7 +18,7 @@ figure is drawn. If the guesser can get the word before the drawing is done, the
 - For chooser - they will be able to input their word
 
 
-## Techinical Design:
+## Technical Design:
 - Networking: Allow two (or more tbd) players to play against each other.
 - Signals: To relay the what letters the guessers guess and what the word is.
 - Share Memory/ Semaphores: Only one guesser can go at a time.
