@@ -30,6 +30,6 @@ get the word before the drawing is done, they win.
 January 6 - Figure out networking/ get communication between 2 players.  
 January 10 - Make basic functions of hangman on one computer.
 January 13 - Create multiplayer using networking
-January 15 - Add extra features / make sure everything working
+January 15 - Add extra features / make sure everything working  
 January 16/17 - Submit!
 
