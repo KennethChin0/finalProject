@@ -1,7 +1,7 @@
 # Hangman
- 0  
-\ |/  
-/ \  
+  O  
+\ | /  
+ / \  
 
 
 ## Members
