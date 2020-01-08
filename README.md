@@ -22,7 +22,7 @@ But here's the twist:
 Players do not get to see which letters have been guessed, and whether the guessed letters are correct/incorrect, until right before their turn. They will have 3 seconds to view it. Then they will not be able to see it, and will have 5 seconds to guess a letter or a word. If they guess wrong, they will get a strike (so an addition of a body part). 
 
 ## Description of User Interface:  
-- There will be an option to play single player or two player.  
+- There will be an option to play single player or two player (local game).
 - The computer generates a random word / phrase and the players will take turns guessing.  
 - Using the terminal, the player is given 6 lives, represented by a picture.
 
