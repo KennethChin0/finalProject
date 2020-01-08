@@ -56,13 +56,13 @@ Players do not get to see which letters have been guessed, and whether the guess
 - Implement timer for turns, and time to view the guessed letters and their correct/incorrect status.
 
 ## Timeline:
-January 6 - Get hangman versus the computer down. (Basic Functions)  Part 1
+January 10 - Get hangman versus the computer down. (Basic Functions)  Part 1
 
-January 8 - Get hangman versus the computer down. (Basic Functions) Part 2
+January 11 - Get hangman versus the computer down. (Basic Functions) Part 2
 
-January 10 - Add networking portion (2 player mode)
+January 13 -  (basic Functions) Part 3
 
-January 13 - Implement any extra features / check for errors/mistakes
+January 15 - add any extra features
 
 January 16/17 - Submit!
 
