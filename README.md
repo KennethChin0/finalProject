@@ -32,7 +32,7 @@ Players do not get to see which letters have been guessed, and whether the guess
 - Semaphores: When the two-player option is chosen, we will use semaphores to only allow one player at a time to view the guessed letters and their correct/incorrect status, for a limited time. We will also use semaphores to allow one player at a time to access the guessing box.
 - Shared memory: Multiple players can access the guessing box, and multiple players can view the guessed letters and their correct/incorrect status.
 - Signals: To relay the guess between two guesses.
-- Processes: We need to fork new processes to allow the player to have multiple turns.
+- Processes: We'll have multiple processes running
 - File access/use: File for a word bank.
 
 ## Project Breakdown:
