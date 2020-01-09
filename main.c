@@ -10,11 +10,16 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include "function.h"
 
 
+int main() {
+    int lives = 6;
+    // setup();
+    char* word[512];
+    while (lives > 0){
+      lives-- ;
+      printf("hi\n");
+    }
 
-int main(int argc, char *argv[]) {
-    char* input = argv[1];
-    control(input);
-    return 0;
   }
