@@ -8,7 +8,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 
-int checkletter(char* enter, char* bankletter);
+int checkletter(char* enter, char** bankletter);
 
 int draw(int lives);
 
