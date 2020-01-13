@@ -70,6 +70,10 @@
       }
     }
 
+	//fork = fork();
+	//if(fork == 0)
+	//	execvp("clear",
+
     //no more lives
     printf("Ran out of lives :(\n");
 
