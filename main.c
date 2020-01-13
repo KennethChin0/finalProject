@@ -15,8 +15,11 @@
 
 
   int main() {
+	int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
+	char * answer;
+	answer = shmat(shmid, 0, 0);
+
     srand(time(0));
-    char answer[128];
     strcpy(answer, generate_word());
     int lives = 6;
     int size = strlen(answer) - 1;
