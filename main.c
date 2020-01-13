@@ -22,7 +22,7 @@
     srand(time(0));
     strcpy(answer, generate_word());
     int lives = 6;
-    int size = strlen(answer) - 1;
+    int size = strlen(answer);
     int check[size];
     for (int i=0; i < size; ++i) {
       check[i] = 0;
