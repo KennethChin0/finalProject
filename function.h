@@ -12,6 +12,8 @@ int checkletter(char* enter, char** bankletter);
 
 int draw(int lives);
 
-int generate_word(char* word);
+char* generate_word();
+
+char **  parse_args( char * line );
 
 void setup();
