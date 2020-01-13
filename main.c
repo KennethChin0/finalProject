@@ -28,7 +28,7 @@
       check[i] = 0;
     }
     while (lives > 0) {
-      printf("Current word: ");
+      printf("\nCurrent word: ");
       for(int i = 0; i < size; i++) {
         if (check[i]) {
           printf("%c", answer[i]);
@@ -57,6 +57,7 @@
         lives--;
         printf("%d\n", lives);
       }
+      draw(lives);
       int win = 0;
       // Check if user win
       for(int m = 0; m < size; ++m) {
