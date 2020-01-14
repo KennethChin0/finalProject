@@ -48,10 +48,15 @@
       // check if guess is right
       int correct = 0;
       for(int k=0; k < size; ++k) {
-        if (answer[k] == guess) {
-  	       check[k] = 1;
+        if (answer[k] == guess && !check[k]) {
+  	   	check[k] = 1;
            correct = 1;
         }
+	else if (answer[k] == guess && check[k] == 1)
+	{
+		//if you guess a previously guessed correct letter
+		correct = 0;
+	}
       }
       if (correct == 0){
         lives--;
@@ -70,7 +75,7 @@
         return 0;
       }
     }
-
+	//clear board
 	char ** args = parse_args("clear");
 	int child = fork();
 	int * status;
