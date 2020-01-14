@@ -14,7 +14,7 @@
 #include <time.h>
 
 
-  int main() {
+  int main(int argC, char * argV[]) {
 	int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
 	char * answer;
 	answer = shmat(shmid, 0, 0);
@@ -71,10 +71,22 @@
       }
     }
 
-	//fork = fork();
-	//if(fork == 0)
-	//	execvp("clear",
-
+	char ** args = parse_args("clear");
+	int child = fork();
+	int * status;
+	if(child < 0)
+	{
+		printf("error %d: %s\n", errno, strerror(errno));
+	}
+	else if(child == 0)
+	{
+		execvp("clear", args);
+		exit(*status);
+	}
+	else if(child > 0)
+	{
+		wait(status);
+	}
     //no more lives
     printf("Ran out of lives :(\n");
 
