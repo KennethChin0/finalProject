@@ -32,28 +32,27 @@
 
 int draw(int lives){
   printf("Lives: %d\n", lives);
-  if (lives <= 6){
+  if (lives == 6){
     printf("\n" );
-    if (lives <= 5){
-      printf(" O\n" );
-      if (lives <= 4){
-        printf("/" );
-        if (lives <= 3){
-          printf("|" );
-          if (lives <= 2){
-            printf("\\\n" );
-            if (lives <= 1){
-              printf("/ " );
-              if (lives <= 0){
-                printf("\\\n" );
-              }
-            }
-          }
-        }
-      }
-    }
   }
-
+  else  if (lives == 5){
+      printf(" O\n" );
+  }
+  else  if (lives == 4){
+        printf(" O\n/\n" );
+  }
+  else  if (lives == 3){
+        printf(" O\n/|\n" );
+  }
+  else  if (lives == 2){
+        printf(" O\n/|\\\n" );
+  }
+  else  if (lives == 1){
+        printf(" O\n/|\\\n/\n" );
+  }
+  else  if (lives == 0){
+        printf(" O\n/|\\\n/\\\n" );
+  }
 }
 
 

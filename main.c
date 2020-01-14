@@ -28,6 +28,24 @@
       check[i] = 0;
     }
     while (lives > 0) {
+
+	//clear board
+        char ** args = parse_args("clear");
+        int child = fork();
+        int * status;
+        if(child < 0)
+        {
+                printf("error %d: %s\n", errno, strerror(errno));
+        }
+        else if(child == 0)
+        {
+                execvp("clear", args);
+                exit(*status);
+        }
+        else if(child > 0)
+        {
+                wait(status);
+        }
       printf("\nCurrent word: ");
       for(int i = 0; i < size; i++) {
         if (check[i]) {
@@ -39,11 +57,13 @@
       }
       printf("\n");
 
+	//draw
+	draw(lives);
+
       // Get guess
       char guess;
       printf("Letter? ");
       scanf(" %c", &guess);
-
 
       // check if guess is right
       int correct = 0;
@@ -62,7 +82,6 @@
         lives--;
         printf("%d\n", lives);
       }
-      draw(lives);
       int win = 0;
       // Check if user win
       for(int m = 0; m < size; ++m) {
@@ -75,23 +94,6 @@
         return 0;
       }
     }
-	//clear board
-	char ** args = parse_args("clear");
-	int child = fork();
-	int * status;
-	if(child < 0)
-	{
-		printf("error %d: %s\n", errno, strerror(errno));
-	}
-	else if(child == 0)
-	{
-		execvp("clear", args);
-		exit(*status);
-	}
-	else if(child > 0)
-	{
-		wait(status);
-	}
     //no more lives
     printf("Ran out of lives :(\n");
 
