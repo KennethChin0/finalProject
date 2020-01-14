@@ -35,17 +35,17 @@ int draw(int lives){
   if (lives <= 6){
     printf("\n" );
     if (lives <= 5){
-      printf("O\n" );
+      printf(" O\n" );
       if (lives <= 4){
         printf("/" );
         if (lives <= 3){
           printf("|" );
           if (lives <= 2){
-            printf("/\n" );
+            printf("\\\n" );
             if (lives <= 1){
               printf("/ " );
               if (lives <= 0){
-                printf("/\n" );
+                printf("\\\n" );
               }
             }
           }
