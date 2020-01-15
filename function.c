@@ -145,9 +145,18 @@ char **  parse_args( char * line ){
 void words(char * wordbank){
  int x = 0;
  printf("{");
+ // while(x < 6){
+ //   if (&wordbank[x] != "\0"){
+ //   printf("%s", &wordbank[x]);
+ //   x++;
+ // // }
  while(wordbank[x]){
    printf("%s", &wordbank[x]);
-   x++;
+   x = x +2;
  }
+ // printf("%s\n", &wordbank[0]);
+ // printf("%s\n", &wordbank[1]);
+ //  printf("%s\n", &wordbank[2]);
+
  printf("}\n");
 }
