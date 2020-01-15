@@ -60,12 +60,12 @@
 
         }
 	    else if (answer[k] == guess && check[k] == 1)
-      {
+	      {
 		//if you guess a previously guessed correct letter
 		  correct = 1;
-      printf("You already chose this letter\n");
-      sleep(1);
-	     }
+	 	 printf("You already chose this letter\n");
+	     	 sleep(1);
+	      }
       }
       if (correct == 0){
         lives--;
