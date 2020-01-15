@@ -152,7 +152,7 @@ void words(char * wordbank){
  // // }
  while(wordbank[x]){
    printf("%s", &wordbank[x]);
-   x = x +2;
+   x++ ;
  }
  // printf("%s\n", &wordbank[0]);
  // printf("%s\n", &wordbank[1]);
