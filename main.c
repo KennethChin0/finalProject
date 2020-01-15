@@ -28,7 +28,7 @@
       check[i] = 0;
     }
     int w = 0;
-    char wordbank[27];
+    char wordbank[104];
     while (lives > 0) {
       clear();
       printf("\nCurrent word: ");
