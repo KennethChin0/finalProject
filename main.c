@@ -23,14 +23,19 @@
     strcpy(answer, generate_word());
     int lives = 6;
     int size = strlen(answer);
-    int check[size];
+    int check[size];//checking array
+    int correct = 1;//correct status of guess
     for (int i=0; i < size; ++i) {
       check[i] = 0;
     }
-    int w = 0;
+    int w = 0;//wordbank index
     char wordbank[100];
     while (lives > 0) {
       clear();
+      if(!correct)
+      {
+        printf("Your guess is incorrect\n");
+      }
       printf("\nCurrent word: ");
       for(int i = 0; i < size; i++) {
         if (check[i]) {
@@ -42,40 +47,42 @@
       }
       printf("\n");
 
-	     //draw
-	     draw(lives);
-       words(wordbank);
+      //draw
+      draw(lives);
+      words(wordbank);
 
       // Get guess
       char guess;
       printf("Your Guess: ");
       scanf(" %c", &guess);
 
-      // check if guess is right
-      int correct = 0;
       for(int k=0; k < size; ++k) {
         if (answer[k] == guess && !check[k]) {
-  	   	   check[k] = 1;
+	   printf("Correct letter!\n");
+  	   check[k] = 1;
            correct = 1;
-
         }
-	    else if (answer[k] == guess && check[k] == 1)
-	      {
+	else if (answer[k] == guess && check[k] == 1)
+	{
 		//if you guess a previously guessed correct letter
-		  correct = 1;
-	 	     printf("You already chose this letter\n");
-	     	 sleep(1);
-	      }
+		correct = 1;
+	 	printf("You already chose this letter\n");
+	     	sleep(1);
+	}
       }
+      correct = 0;
       if (correct == 0){
         lives--;
-        printf("word is incorrect\n");
-        wordbank[w] = guess;
-        wordbank[w+1] = '\0';
-        printf("%s\n", &wordbank[w]);
-        w = w + 2;
-      }
-      int win = 0;
+	if(strchr(wordbank, guess))//if strchr is not 0
+	{
+        	wordbank[w] = guess;
+        	wordbank[w+1] = '\0';
+        	//printf("%s\n", &wordbank[w]);
+        	//w = w + 2;
+		w++;
+        }
+     } 
+int win = 0;
       // Check if user win
       for(int m = 0; m < size; ++m) {
         if (check[m] == 1) {
