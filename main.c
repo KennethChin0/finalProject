@@ -27,25 +27,10 @@
     for (int i=0; i < size; ++i) {
       check[i] = 0;
     }
+    int w = 0;
+    char wordbank[27];
     while (lives > 0) {
-
-	//clear board
-        char ** args = parse_args("clear");
-        int child = fork();
-        int * status;
-        if(child < 0)
-        {
-                printf("error %d: %s\n", errno, strerror(errno));
-        }
-        else if(child == 0)
-        {
-                execvp("clear", args);
-                exit(*status);
-        }
-        else if(child > 0)
-        {
-                wait(status);
-        }
+      clear();
       printf("\nCurrent word: ");
       for(int i = 0; i < size; i++) {
         if (check[i]) {
@@ -57,30 +42,36 @@
       }
       printf("\n");
 
-	//draw
-	draw(lives);
+	     //draw
+	     draw(lives);
+       words(wordbank);
 
       // Get guess
       char guess;
-      printf("Letter? ");
+      printf("Your Guess: ");
       scanf(" %c", &guess);
 
       // check if guess is right
       int correct = 0;
       for(int k=0; k < size; ++k) {
         if (answer[k] == guess && !check[k]) {
-  	   	check[k] = 1;
+  	   	   check[k] = 1;
            correct = 1;
+
         }
-	else if (answer[k] == guess && check[k] == 1)
-	{
+	    else if (answer[k] == guess && check[k] == 1)
+      {
 		//if you guess a previously guessed correct letter
-		correct = 0;
-	}
+		  correct = 1;
+      printf("You already chose this letter\n");
+      sleep(1);
+	     }
       }
       if (correct == 0){
         lives--;
-        printf("%d\n", lives);
+        // printf("%d\n", lives);
+        wordbank[w] = guess;
+        w++;
       }
       int win = 0;
       // Check if user win
@@ -93,8 +84,10 @@
         printf("win\n");
         return 0;
       }
+
     }
     //no more lives
+    draw(lives);
     printf("Ran out of lives :(\n");
 
     return 0;

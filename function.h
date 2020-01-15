@@ -21,4 +21,6 @@ char* generate_word();
 
 char **  parse_args( char * line );
 
-void setup();
+void clear();
+
+void words(char * wordbank);

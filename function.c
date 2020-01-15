@@ -55,6 +55,25 @@
 //   }
 // }
 
+void clear(){
+  char ** args = parse_args("clear");
+  int child = fork();
+  int * status;
+  if(child < 0)
+  {
+          printf("error %d: %s\n", errno, strerror(errno));
+  }
+  else if(child == 0)
+  {
+          execvp("clear", args);
+          exit(*status);
+  }
+  else if(child > 0)
+  {
+          wait(status);
+  }
+
+}
 
 int draw(int lives){
   printf("Lives: %d\n", lives);
@@ -123,4 +142,12 @@ char **  parse_args( char * line ){
   return args;
 }
 
-void setup();
+void words(char * wordbank){
+ int x = 0;
+ printf("{");
+ while(wordbank[x]){
+   printf("%s", &wordbank[x]);
+   x++;
+ }
+ printf("}\n");
+}
