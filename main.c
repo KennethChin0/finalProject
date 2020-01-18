@@ -21,6 +21,8 @@
 
     srand(time(0));
     strcpy(answer, generate_word());
+    
+    //strcpy(answer, "bobson");//to make it copy one single word
     int lives = 6;
     int size = strlen(answer);
     int check[size];//checking array
