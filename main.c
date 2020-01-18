@@ -92,10 +92,17 @@ int main(int argC, char * argV[]) {
       }
     }
     if (win == size){
-      printf("win\n");
-      return 0;
+      break;
     }
 
+  }
+
+  shmdt(answer);
+  shmctl(shmd, IPC_RMID, 0);
+  if(win == size)
+  {
+    printf("win\n");
+    return 0;
   }
   //no more lives
   draw(lives);
