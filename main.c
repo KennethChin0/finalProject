@@ -84,7 +84,7 @@
 		w++;
         }
      } 
-int win = 0;
+      int win = 0;
       // Check if user win
       for(int m = 0; m < size; ++m) {
         if (check[m] == 1) {
