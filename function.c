@@ -61,16 +61,16 @@ void clear(){
   int * status;
   if(child < 0)
   {
-          printf("error %d: %s\n", errno, strerror(errno));
+    printf("error %d: %s\n", errno, strerror(errno));
   }
   else if(child == 0)
   {
-          execvp("clear", args);
-          exit(*status);
+    execvp("clear", args);
+    exit(*status);
   }
   else if(child > 0)
   {
-          wait(status);
+    wait(status);
   }
 
 }
@@ -157,7 +157,7 @@ void words(char * wordbank){
   //}
   // printf("%s\n", &wordbank[0]);
   // printf("%s\n", &wordbank[1]);
-  //  printf("%s\n", &wordbank[2]);
+  // printf("%s\n", &wordbank[2]);
 
   printf("}\n");
 }
