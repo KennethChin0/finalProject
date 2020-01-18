@@ -24,6 +24,7 @@ int main(int argC, char * argV[]) {
 
   //strcpy(answer, "bobson");//to make it copy one single word
   int lives = 6;
+  int win = 0;//check win status
   int size = strlen(answer);
   int check[size];//checking array
   int correct = 1;//correct status of guess
@@ -84,7 +85,7 @@ int main(int argC, char * argV[]) {
         w++;
       }
     }
-    int win = 0;
+    win = 0;
     // Check if user win
     for(int m = 0; m < size; ++m) {
       if (check[m] == 1) {
@@ -98,7 +99,7 @@ int main(int argC, char * argV[]) {
   }
 
   shmdt(answer);
-  shmctl(shmd, IPC_RMID, 0);
+  shmctl(shmid, IPC_RMID, 0);
   if(win == size)
   {
     printf("win\n");
