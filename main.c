@@ -73,7 +73,7 @@ int main(int argC, char * argV[]) {
         sleep(1);
       }
     }
-    correct = 0;
+    // correct = 0;
     if (correct == 0){
       lives--;
       if(strchr(wordbank, guess))//if strchr is not 0
