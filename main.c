@@ -27,7 +27,7 @@ int main(int argC, char * argV[]) {
   int win = 0;//check win status
   int size = strlen(answer);
   int check[size];//checking array
-  int correct = 1;//correct status of guess
+  int correct = 0;//correct status of guess
   for (int i=0; i < size; ++i) {
     check[i] = 0;
   }
