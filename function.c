@@ -40,7 +40,7 @@ int shmsetup(key_t key, void ** pointer){
     printf("can't create shared memory (likely cause: shared memory already exists)\n");
     printf("error %d: %s\n", errno, strerror(errno));
     shmid = shmget(key, SIZE, 0644);
-    printf("after getting shmid from existing memory\n");
+    printf("getting existing shmid: %d\n", shmid);
   }
 
   * pointer = shmat(shmid, 0, 0);//checking array to be shared between players
@@ -74,14 +74,14 @@ int semsetup(){
   {
     printf("semaphore existed before, was not changed\n");
     int semval = semctl(semid, 0, GETVAL, 0);
-    if(semval < 1)//comment this out when semaphores are ready
-    {//comment this out when semaphores are ready
-      struct sembuf sb;//comment this out when semaphores are ready
-      sb.sem_num = 0;//comment this out when semaphores are ready
-      sb.sem_op = 1;//comment this out when semaphores are ready
-      semop(semid, &sb, 1);//comment this out when semaphores are ready
-    }//comment this out when semaphores are ready
-    semval = semctl(semid, 0, GETVAL, 0);//comment this out when semaphores are ready
+//    if(semval < 1)//comment this out when semaphores are ready
+//    {//comment this out when semaphores are ready
+//      struct sembuf sb;//comment this out when semaphores are ready
+//      sb.sem_num = 0;//comment this out when semaphores are ready
+//      sb.sem_op = 1;//comment this out when semaphores are ready
+//      semop(semid, &sb, 1);//comment this out when semaphores are ready
+//    }//comment this out when semaphores are ready
+//    semval = semctl(semid, 0, GETVAL, 0);//comment this out when semaphores are ready
     printf("semaphore has a value of %d\n", semval);
   }
   return semid;

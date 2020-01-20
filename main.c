@@ -32,8 +32,6 @@ int main(int argC, char * argV[]) {
   char answer[100];
   //strcpy(answer, generate_word());
   strcpy(answer, "bobson");//to make it copy one single word
-  printf("answer is %ld\n", answer);
-  printf("*answer is %ld\n", *answer);
   int size = strlen(answer);//may need hardcoding to make sure generate_word() works
   for (int i=0; i < size; ++i) {
     check[i] = 0;
@@ -46,7 +44,6 @@ int main(int argC, char * argV[]) {
   strcpy(wordbank, "abcdefghijklmnopqrstuvwxyz");
 
   while (lives > 0) {
-    signal(SIGINT, sighandler);
     // Check if user win
     for(int m = 0; m < size; ++m) {
       if (check[m] == 1) {
@@ -57,6 +54,12 @@ int main(int argC, char * argV[]) {
       break;
     }
 
+    //to get interrupt signal from player and ask player to exit instead
+    signal(SIGINT, sighandler);
+
+    //checking semaphore status
+    int semval = semctl(semid, 0, GETVAL, 0);
+    printf("semaphore has a value of %d\n", semval);
     printf("waiting for your turn...\n");
     struct sembuf sb;
     sb.sem_num = 0;
@@ -101,7 +104,7 @@ int main(int argC, char * argV[]) {
     //if user wants to exit
     if(!strcmp("exit", word))
     {
-      printf("user wants to exit");
+      printf("user wants to exit\n");
       break;
     }
 
@@ -147,9 +150,13 @@ int main(int argC, char * argV[]) {
   }
 
   shmdt(check);
-  printf("shared memory detached!\n");
+  printf("check shared memory detached!\n");
+  shmdt(wordbank);
+  printf("wordbank shared memory detached!\n");
   shmctl(checkid, IPC_RMID, 0);
-  printf("shared memory removed!\n");
+  printf("check shared memory removed!\n");
+  shmctl(bankid, IPC_RMID, 0);
+  printf("bank shared memory removed!\n");
   semctl(semid, IPC_RMID, 0);
   printf("semaphore removed!\n");
   if(win == size)
