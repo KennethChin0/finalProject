@@ -17,11 +17,13 @@
 
 int main(int argC, char * argV[]) {
   int * check;
-  int shmid = shmsetup(&check);
+  char * wordbank;
+  int checkid = shmsetup(CHECK_KEY, &check);
+  int bankid = shmsetup(BANK_KEY, &wordbank);
   int semid = semsetup();
   srand(time(0));
 
-  char answer[1024];
+  char answer[100];
   //strcpy(answer, generate_word());
   strcpy(answer, "bobson");//to make it copy one single word
   printf("answer is %ld\n", answer);
@@ -35,7 +37,7 @@ int main(int argC, char * argV[]) {
   int win = 0;//check win status
   int correct = 1;//correct status of guess
   int w = 0;//wordbank index
-  char wordbank[100] = "abcdefghijklmnopqrstuvwxyz";
+  strcpy(wordbank, "abcdefghijklmnopqrstuvwxyz");
 
   while (lives > 0) {
     signal(SIGINT, sighandler);
@@ -111,20 +113,20 @@ int main(int argC, char * argV[]) {
     int x = 0;
     while(x < 27){
       if (wordbank[x] == guess){
-        wordbank[x] = '0';
+        wordbank[x] = '_';
       }
         x++;
     }
 
     // Check if user win
-    for(int m = 0; m < size; ++m) {
-      if (check[m] == 1) {
-        win++;
-      }
-    }
-    if (win == size){
-      break;
-    }
+    // for(int m = 0; m < size; ++m) {
+    //   if (check[m] == 1) {
+    //     win++;
+    //   }
+    // }
+    // if (win == size){
+    //   break;
+    // }
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     printf("Your turn has ended\n");
@@ -133,7 +135,7 @@ int main(int argC, char * argV[]) {
 
   shmdt(check);
   printf("shared memory detached!\n");
-  shmctl(shmid, IPC_RMID, 0);
+  shmctl(checkid, IPC_RMID, 0);
   printf("shared memory removed!\n");
   semctl(semid, IPC_RMID, 0);
   printf("semaphore removed!\n");

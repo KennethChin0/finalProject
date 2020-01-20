@@ -10,13 +10,15 @@
 #include <sys/shm.h>
 #include <errno.h>
 
-#define SHMKEY 12345
+#define CHECK_KEY 123
+#define BANK_KEY 456
 #define SEMKEY 67890
-#define SIZE 1024
+#define SIZE 100
+
 
 void sighandler(int signal);
 
-int shmsetup(int ** check);
+int shmsetup(key_t key, void ** pointer);
 
 int semsetup();
 

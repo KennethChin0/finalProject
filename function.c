@@ -25,19 +25,19 @@ void sighandler(int signal){
   }
 }
 
-int shmsetup(int ** check){
-  int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | IPC_EXCL | 0644);
+int shmsetup(key_t key, void ** pointer){
+  int shmid = shmget(key, SIZE, IPC_CREAT | IPC_EXCL | 0644);
   printf("shmid is %d\n", shmid);
 
   if(shmid < 0)
   {
     printf("can't create shared memory (likely cause: shared memory already exists)\n");
     printf("error %d: %s\n", errno, strerror(errno));
-    shmid = shmget(SHMKEY, SIZE, 0644);
+    shmid = shmget(key, SIZE, 0644);
     printf("after getting shmid from existing memory\n");
   }
 
-  * check = shmat(shmid, 0, 0);//checking array to be shared between players
+  * pointer = shmat(shmid, 0, 0);//checking array to be shared between players
   return shmid;
 }
 
