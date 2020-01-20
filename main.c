@@ -12,35 +12,32 @@
 #include <errno.h>
 #include "function.h"
 #include <time.h>
-#include <graphics.h>
+//#include <graphics.h>
 //d
 
 
 int main(int argC, char * argV[]) {
-  int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | IPC_EXCL | 0644);
-  printf("shmid is %d\n", shmid);
+  int * check;
+  int shmid = shmsetup(&check);
 
-  if(shmid < 0)
-  {
-    printf("error %d: %s\n", errno, strerror(errno));
-    shmid = shmget(SHMKEY, SIZE, 0644);
-  }
-
-  char * answer;
-  answer = shmat(shmid, 0, 0);
   srand(time(0));
+
+  char answer[1024];
   //strcpy(answer, generate_word());
-  strcpy(answer, generate_word());//to make it copy one single word
-  int lives = 6;
-  int win = 0;//check win status
-  int size = strlen(answer) - 1;
-  int check[size];//checking array
-  int correct = 1;//correct status of guess
+  strcpy(answer, "bobson");//to make it copy one single word
+  printf("answer is %ld\n", answer);
+  printf("*answer is %ld\n", *answer);
+  int size = strlen(answer);//may need hardcoding to make sure generate_word() works
   for (int i=0; i < size; ++i) {
     check[i] = 0;
   }
+
+  int lives = 6;
+  int win = 0;//check win status
+  int correct = 1;//correct status of guess
   int w = 0;//wordbank index
   char wordbank[100] = "abcdefghijklmnopqrstuvwxyz";
+
   while (lives > 0) {
     printf("dummy line to make clear work\n");
     clear();

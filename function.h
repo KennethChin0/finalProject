@@ -13,7 +13,9 @@
 #define SHMKEY 12345
 #define SIZE 1024
 
-int checkletter(char* enter, char** bankletter);
+int shmsetup(int ** check);
+
+void clear();
 
 int draw(int lives);
 
@@ -21,8 +23,4 @@ char* generate_word();
 
 char **  parse_args( char * line );
 
-void clear();
-
 void words(char * wordbank);
-
-void setupwords(char * wordbank);

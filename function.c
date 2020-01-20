@@ -13,47 +13,22 @@
 #include "function.h"
 #include "time.h"
 //
-// int checkletter(char* enter, char** bankletter)//derek
-// {
-//   int bankLength = strlen(*bankletter);
-//   char * charIndex = strchr(*bankletter, *enter);
-//   if(charIndex)
-//   {
-//     *charIndex = bankletter[bankLength - 1];
-//     bankletter[bankLength -1] = NULL;
-//     //set the last letter to null, and the last letter replaces the given letter
-//     return 1;
-//   }
-//   else
-//   {
-//     return 0;
-//   }
-// }
 
-// int draw(int lives){
-//   printf("Lives: %d\n", lives);
-//   if (lives == 6){
-//     printf("\n" );
-//   }
-//   else  if (lives == 5){
-//       printf(" O\n" );
-//   }
-//   else  if (lives == 4){
-//         printf(" O\n/\n" );
-//    }
-//   else  if (lives == 3){
-//         printf(" O\n/|\n" );
-//   }
-//   else  if (lives == 2){
-//         printf(" O\n/|\\\n" );
-//   }
-//   else  if (lives == 1){
-//         printf(" O\n/|\\\n/\n" );
-//   }
-//   else  if (lives == 0){
-//        printf(" O\n/|\\\n/\\\n" );
-//   }
-// }
+int shmsetup(int ** check){
+  int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | IPC_EXCL | 0644);
+  printf("shmid is %d\n", shmid);
+
+  if(shmid < 0)
+  {
+    printf("error likely from getting id from existing file\n");
+    printf("error %d: %s\n", errno, strerror(errno));
+    shmid = shmget(SHMKEY, SIZE, 0644);
+    printf("after getting shmid from existing memory\n");
+  }
+
+  * check = shmat(shmid, 0, 0);//checking array to be shared between players
+  return shmid;
+}
 
 void clear(){
   char ** args = parse_args("clear");
@@ -141,9 +116,6 @@ char **  parse_args( char * line ){
   return args;
 }
 
-// void setupwords(char * wordbank){
-//   wordbank()
-// }
 void words(char * wordbank){
   int x = 0;
   printf("{");
