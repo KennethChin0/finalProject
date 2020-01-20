@@ -28,10 +28,10 @@ int main(int argC, char * argV[]) {
   answer = shmat(shmid, 0, 0);
   srand(time(0));
   //strcpy(answer, generate_word());
-  strcpy(answer, "bobson");//to make it copy one single word
+  strcpy(answer, generate_word());//to make it copy one single word
   int lives = 6;
   int win = 0;//check win status
-  int size = strlen(answer);
+  int size = strlen(answer) - 1;
   int check[size];//checking array
   int correct = 1;//correct status of guess
   for (int i=0; i < size; ++i) {
