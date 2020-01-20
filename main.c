@@ -15,6 +15,12 @@
 //#include <graphics.h>
 //d
 
+// int * check;
+// char * wordbank;
+// int checkid = shmsetup(CHECK_KEY, &check);
+// int bankid = shmsetup(BANK_KEY, &wordbank);
+
+
 int main(int argC, char * argV[]) {
   int * check;
   char * wordbank;
@@ -89,8 +95,15 @@ int main(int argC, char * argV[]) {
 
     // Get guess
     printf("Your Guess: ");
-    char guess;
-    scanf(" %c", &guess);
+    char word[100];
+    scanf("%s", word);
+    char guess = word[0];
+    //if user wants to exit
+    if(!strcmp("exit", word))
+    {
+      printf("user wants to exit");
+      break;
+    }
 
     for(int k=0; k < size; ++k) {
       if (answer[k] == guess && !check[k]) {
@@ -141,7 +154,7 @@ int main(int argC, char * argV[]) {
   printf("semaphore removed!\n");
   if(win == size)
   {
-    printf("win\n");
+    printf("You won!\n");
     return 0;
   }
   //no more lives

@@ -13,15 +13,21 @@
 #include "function.h"
 #include "time.h"
 //
+int counter = 0;
 
 void sighandler(int signal){
   if(signal == SIGINT)
   {
-    int status;
-    printf("can't touch this\n");
-    sleep(1);
-    printf("just kidding\n");
-    exit(status);
+    if(counter < 3)
+    {
+      printf("type exit in the guess, or control c %d more time(s)\n", 3 - counter);
+      counter ++;
+    }
+    else
+    {
+      int status;
+      exit(status);
+    }
   }
 }
 
