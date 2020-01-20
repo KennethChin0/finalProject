@@ -15,13 +15,20 @@
 
 
 int main(int argC, char * argV[]) {
-  int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
+  int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | IPC_EXCL | 0644);
+  printf("shmid is %d\n", shmid);
+
+  if(shmid < 0)
+  {
+    printf("error %d: %s\n", errno, strerror(errno));
+    shmid = shmget(SHMKEY, SIZE, 0644);
+  }
+
   char * answer;
   answer = shmat(shmid, 0, 0);
   srand(time(0));
-  strcpy(answer, generate_word());
-
-  //strcpy(answer, "bobson");//to make it copy one single word
+  //strcpy(answer, generate_word());
+  strcpy(answer, "bobson");//to make it copy one single word
   int lives = 6;
   int win = 0;//check win status
   int size = strlen(answer);
@@ -39,7 +46,12 @@ int main(int argC, char * argV[]) {
     {
       printf("Your guess is incorrect\n");
     }
+
+    //set correct status back to incorrect
     correct = 0;
+
+    //set win status back to none
+    win = 0;
     printf("\nCurrent word: ");
     for(int i = 0; i < size; i++) {
       if (check[i]) {
@@ -51,6 +63,8 @@ int main(int argC, char * argV[]) {
     }
     printf("\n");
     printf("answer is %s\n", answer);
+
+    printf("Lives: %d\n", lives);
     //draw
     draw(lives);
     // words(wordbank);
@@ -94,6 +108,7 @@ int main(int argC, char * argV[]) {
       }
         x++;
     }
+
     // Check if user win
     for(int m = 0; m < size; ++m) {
       if (check[m] == 1) {

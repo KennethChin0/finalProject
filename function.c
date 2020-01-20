@@ -76,7 +76,6 @@ void clear(){
 }
 
 int draw(int lives){
-  printf("Lives: %d\n", lives);
   if (lives <= 6){
     printf("\n" );
     if (lives <= 5){
