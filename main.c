@@ -27,7 +27,7 @@ int main(int argC, char * argV[]) {
     printf("Hi! My FUCKKKK\n");
     //printf("error %d: %s\n", errno, strerror(errno));
   }
-
+  printf("made it out of conditional!\n");
   srand(time(0));
   strcpy(answer, generate_word());
 
