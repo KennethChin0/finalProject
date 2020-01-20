@@ -63,7 +63,7 @@ int main(int argC, char * argV[]) {
       }
     }
     printf("\n");
-
+    printf("answer is %s\n", answer);
     //draw
     draw(lives);
     // words(wordbank);
