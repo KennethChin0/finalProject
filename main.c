@@ -22,6 +22,7 @@
 
 
 int main(int argC, char * argV[]) {
+  int bigbrain = 0;
   int * check;
   char * wordbank;
   int checkid = shmsetup(CHECK_KEY, &check);
@@ -100,6 +101,19 @@ int main(int argC, char * argV[]) {
     printf("Your Guess: ");
     char word[100];
     scanf("%s", word);
+    if (strlen(word) > 1) {
+      printf("here\n");
+      // break;
+      if (strcmp(word,answer) == 0){
+        printf("winner winner chicken dinner\n");
+        bigbrain = 200;
+        break;
+      }
+      else{
+        printf("wrong\n");
+      }
+    }
+    else {
     char guess = word[0];
     //if user wants to exit
     if(!strcmp("exit", word))
@@ -143,11 +157,14 @@ int main(int argC, char * argV[]) {
     // if (win == size){
     //   break;
     // }
+    }
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     printf("Your turn has ended\n");
     sleep(1);
     debugIterationCounter ++;
+
+
   }
 
   shmdt(check);
@@ -166,8 +183,9 @@ int main(int argC, char * argV[]) {
     return 0;
   }
   //no more lives
+  if (bigbrain == 0){
   draw(lives);
   printf("Ran out of lives :(\n");
-
+  }
   return 0;
 }
