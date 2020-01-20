@@ -15,28 +15,9 @@
 
 
 int main(int argC, char * argV[]) {
-  //clean up code
   int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
   char * answer;
   answer = shmat(shmid, 0, 0);
-  shmdt(answer);
-  shmctl(shmid, IPC_RMID, 0);
-
-  //code for shared memory
-  shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
-  answer = shmat(shmid, 0, 0);
-  //char answer[1024]
-  //int test;
-  //test = shmat(shmid, 0, 0);
-
-  //printf("test is %d\n", test);
-
-  //if(test < 0)
-  //{
-    //printf("Hi! My FUCKKKK\n");
-    //printf("error %d: %s\n", errno, strerror(errno));
-  //}
-  printf("made it out of conditional!\n");
   srand(time(0));
   strcpy(answer, generate_word());
 
