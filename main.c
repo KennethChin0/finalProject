@@ -77,13 +77,6 @@ int main(int argC, char * argV[]) {
     // correct = 0;
     if (correct == 0){
       lives--;
-      int x = 0;
-      while(x < 27){
-        if (wordbank[x] == guess){
-          wordbank[x] = ' ';
-        }
-          x++;
-      }
       // if(strchr(wordbank, guess))//if strchr is not 0
       // {
       //   wordbank[w] = guess;
@@ -94,6 +87,14 @@ int main(int argC, char * argV[]) {
       // }
     }
     win = 0;
+
+    int x = 0;
+    while(x < 27){
+      if (wordbank[x] == guess){
+        wordbank[x] = '0';
+      }
+        x++;
+    }
     // Check if user win
     for(int m = 0; m < size; ++m) {
       if (check[m] == 1) {
