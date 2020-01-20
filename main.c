@@ -57,10 +57,8 @@ int main(int argC, char * argV[]) {
     //to get interrupt signal from player and ask player to exit instead
     signal(SIGINT, sighandler);
 
-    //checking semaphore status
-    int semval = semctl(semid, 0, GETVAL, 0);
-    printf("semaphore has a value of %d\n", semval);
     printf("waiting for your turn...\n");
+    printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again!\n");
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
