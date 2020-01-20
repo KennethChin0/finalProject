@@ -15,11 +15,10 @@
 //#include <graphics.h>
 //d
 
-
 int main(int argC, char * argV[]) {
   int * check;
   int shmid = shmsetup(&check);
-
+  int semid = semsetup();
   srand(time(0));
 
   char answer[1024];
@@ -39,7 +38,25 @@ int main(int argC, char * argV[]) {
   char wordbank[100] = "abcdefghijklmnopqrstuvwxyz";
 
   while (lives > 0) {
-    printf("dummy line to make clear work\n");
+    signal(SIGINT, sighandler);
+    // Check if user win
+    for(int m = 0; m < size; ++m) {
+      if (check[m] == 1) {
+        win++;
+      }
+    }
+    if (win == size){
+      break;
+    }
+
+    printf("waiting for your turn...\n");
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = -1;
+    semop(semid, &sb, 1);
+    printf("It's now your turn!\n");
+    sleep(1);
+
     clear();
     if(!correct)
     {
@@ -48,7 +65,6 @@ int main(int argC, char * argV[]) {
 
     //set correct status back to incorrect
     correct = 0;
-
     //set win status back to none
     win = 0;
     printf("\nCurrent word: ");
@@ -90,14 +106,6 @@ int main(int argC, char * argV[]) {
     }
     if (correct == 0){
       lives--;
-      // if(strchr(wordbank, guess))//if strchr is not 0
-      // {
-      //   wordbank[w] = guess;
-      //   wordbank[w+1] = '\0';
-      //   //printf("%s\n", &wordbank[w]);
-      //   //w = w + 2;
-      //   w++;
-      // }
     }
 
     int x = 0;
@@ -117,11 +125,18 @@ int main(int argC, char * argV[]) {
     if (win == size){
       break;
     }
-
+    sb.sem_op = 1;
+    semop(semid, &sb, 1);
+    printf("Your turn has ended\n");
+    sleep(1);
   }
 
-  shmdt(answer);
+  shmdt(check);
+  printf("shared memory detached!\n");
   shmctl(shmid, IPC_RMID, 0);
+  printf("shared memory removed!\n");
+  semctl(semid, IPC_RMID, 0);
+  printf("semaphore removed!\n");
   if(win == size)
   {
     printf("win\n");

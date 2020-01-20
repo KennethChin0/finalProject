@@ -11,9 +11,14 @@
 #include <errno.h>
 
 #define SHMKEY 12345
+#define SEMKEY 67890
 #define SIZE 1024
 
+void sighandler(int signal);
+
 int shmsetup(int ** check);
+
+int semsetup();
 
 void clear();
 

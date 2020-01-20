@@ -14,13 +14,24 @@
 #include "time.h"
 //
 
+void sighandler(int signal){
+  if(signal == SIGINT)
+  {
+    int status;
+    printf("can't touch this\n");
+    sleep(1);
+    printf("just kidding\n");
+    exit(status);
+  }
+}
+
 int shmsetup(int ** check){
   int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | IPC_EXCL | 0644);
   printf("shmid is %d\n", shmid);
 
   if(shmid < 0)
   {
-    printf("error likely from getting id from existing file\n");
+    printf("can't create shared memory (likely cause: shared memory already exists)\n");
     printf("error %d: %s\n", errno, strerror(errno));
     shmid = shmget(SHMKEY, SIZE, 0644);
     printf("after getting shmid from existing memory\n");
@@ -28,6 +39,46 @@ int shmsetup(int ** check){
 
   * check = shmat(shmid, 0, 0);//checking array to be shared between players
   return shmid;
+}
+
+int semsetup(){
+  int semid = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
+  printf("semid is %d\n", semid);
+  int semidExistedBefore = 0;
+  if(semid < 0)
+  {
+    printf("can't create semaphore (likely cause: semaphore already exists)\n");
+    printf("error %d: %s\n", errno, strerror(errno));
+    semid = semget(SEMKEY, 1, 0644);
+    printf("getting existing semid: %d\n", semid);
+    printf("\n");
+    if(semid >= 0)
+      semidExistedBefore = 1;
+  }
+  if(!semidExistedBefore)
+  {
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = 1;
+    semop(semid, &sb, 1);
+    int semval = semctl(semid, 0, GETVAL, 0);
+    printf("semaphore upped to have a value of %d\n", semval);
+  }
+  else
+  {
+    printf("semaphore existed before, was not changed\n");
+    int semval = semctl(semid, 0, GETVAL, 0);
+    if(semval < 1)//comment this out when semaphores are ready
+    {//comment this out when semaphores are ready
+      struct sembuf sb;//comment this out when semaphores are ready
+      sb.sem_num = 0;//comment this out when semaphores are ready
+      sb.sem_op = 1;//comment this out when semaphores are ready
+      semop(semid, &sb, 1);//comment this out when semaphores are ready
+    }//comment this out when semaphores are ready
+    semval = semctl(semid, 0, GETVAL, 0);//comment this out when semaphores are ready
+    printf("semaphore has a value of %d\n", semval);
+  }
+  return semid;
 }
 
 void clear(){
