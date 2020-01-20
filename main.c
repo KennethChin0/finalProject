@@ -12,6 +12,7 @@
 #include <errno.h>
 #include "function.h"
 #include <time.h>
+#include <graphics.h>
 
 
 int main(int argC, char * argV[]) {
