@@ -13,6 +13,7 @@
 #include "function.h"
 #include <time.h>
 #include <graphics.h>
+//d
 
 
 int main(int argC, char * argV[]) {
