@@ -18,6 +18,13 @@ int main(int argC, char * argV[]) {
   int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
   char * answer;
   answer = shmat(shmid, 0, 0);
+  printf("answer is %ld\n", answer);
+
+  if(answer < 0)
+  {
+    printf("sexy stuff\n");
+    printf("error %d: %s\n", errno, strerror(errno));
+  }
 
   srand(time(0));
   strcpy(answer, generate_word());
