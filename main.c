@@ -17,8 +17,10 @@
 int main(int argC, char * argV[]) {
   int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
   char * answer;
+  
+
   answer = shmat(shmid, 0, 0);
-  printf("answer is %s\n", answer);
+  printf("answer is %ld\n", answer);
 
   if(answer < 0)
   {
