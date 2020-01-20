@@ -24,3 +24,5 @@ char **  parse_args( char * line );
 void clear();
 
 void words(char * wordbank);
+
+void setupwords(char * wordbank);

@@ -32,7 +32,7 @@ int main(int argC, char * argV[]) {
     check[i] = 0;
   }
   int w = 0;//wordbank index
-  char wordbank[100];
+  char wordbank[100] = "abcdefghijklmnopqrstuvwxyz";
   while (lives > 0) {
     clear();
     if(!correct)
@@ -52,7 +52,8 @@ int main(int argC, char * argV[]) {
 
     //draw
     draw(lives);
-    words(wordbank);
+    // words(wordbank);
+    printf("{%s}\n", wordbank);
 
     // Get guess
     char guess;
@@ -76,14 +77,21 @@ int main(int argC, char * argV[]) {
     // correct = 0;
     if (correct == 0){
       lives--;
-      if(strchr(wordbank, guess))//if strchr is not 0
-      {
-        wordbank[w] = guess;
-        wordbank[w+1] = '\0';
-        //printf("%s\n", &wordbank[w]);
-        //w = w + 2;
-        w++;
+      int x = 0;
+      while(x < 27){
+        if (wordbank[x] == guess){
+          wordbank[x] = ' ';
+        }
+          x++;
       }
+      // if(strchr(wordbank, guess))//if strchr is not 0
+      // {
+      //   wordbank[w] = guess;
+      //   wordbank[w+1] = '\0';
+      //   //printf("%s\n", &wordbank[w]);
+      //   //w = w + 2;
+      //   w++;
+      // }
     }
     win = 0;
     // Check if user win

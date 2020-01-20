@@ -142,6 +142,9 @@ char **  parse_args( char * line ){
   return args;
 }
 
+// void setupwords(char * wordbank){
+//   wordbank()
+// }
 void words(char * wordbank){
   int x = 0;
   printf("{");
