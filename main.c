@@ -16,16 +16,19 @@
 
 int main(int argC, char * argV[]) {
   int shmid = shmget(SHMKEY, SIZE, IPC_CREAT | 0644);
-  char * answer;
+  char answer[1024];
   struct shmid_ds * buf;
   shmctl(shmid, IPC_STAT, buf);
-  answer = shmat(shmid, 0, 0);
-  printf("answer is %ld\n", answer);
 
-  if(answer < 0)
+  int test;
+  test = shmat(shmid, 0, 0);
+
+  printf("test is %d\n", test);
+
+  if(test < 0)
   {
     printf("Hi! My FUCKKKK\n");
-    //printf("error %d: %s\n", errno, strerror(errno));
+    printf("error %d: %s\n", errno, strerror(errno));
   }
   printf("made it out of conditional!\n");
   srand(time(0));
@@ -43,6 +46,7 @@ int main(int argC, char * argV[]) {
   int w = 0;//wordbank index
   char wordbank[100] = "abcdefghijklmnopqrstuvwxyz";
   while (lives > 0) {
+    printf("running clear\n");
     clear();
     if(!correct)
     {
@@ -65,8 +69,8 @@ int main(int argC, char * argV[]) {
     printf("{%s}\n", wordbank);
 
     // Get guess
-    char guess;
     printf("Your Guess: ");
+    char guess;
     scanf(" %c", &guess);
 
     for(int k=0; k < size; ++k) {
@@ -83,7 +87,6 @@ int main(int argC, char * argV[]) {
         sleep(1);
       }
     }
-    // correct = 0;
     if (correct == 0){
       lives--;
       // if(strchr(wordbank, guess))//if strchr is not 0
