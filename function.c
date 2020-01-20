@@ -97,11 +97,13 @@ void clear(){
   }
   else if(child == 0)
   {
+    printf("I'm with stupid, %d\n", getpid());
     execvp("clear", args);
     exit(*status);
   }
   else if(child > 0)
   {
+    printf("I'm with smartass, %d\n", getpid());
     wait(status);
   }
 

@@ -41,6 +41,7 @@ int main(int argC, char * argV[]) {
   int win = 0;//check win status
   int correct = 1;//correct status of guess
   int w = 0;//wordbank index
+  int debugIterationCounter = 0;
   strcpy(wordbank, "abcdefghijklmnopqrstuvwxyz");
 
   while (lives > 0) {
@@ -76,6 +77,7 @@ int main(int argC, char * argV[]) {
     correct = 0;
     //set win status back to none
     win = 0;
+    printf("debugIterationCounter is %d\n", debugIterationCounter);
     printf("\nCurrent word: ");
     for(int i = 0; i < size; i++) {
       if (check[i]) {
@@ -145,6 +147,7 @@ int main(int argC, char * argV[]) {
     semop(semid, &sb, 1);
     printf("Your turn has ended\n");
     sleep(1);
+    debugIterationCounter ++;
   }
 
   shmdt(check);
