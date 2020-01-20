@@ -52,6 +52,7 @@ int main(int argC, char * argV[]) {
     {
       printf("Your guess is incorrect\n");
     }
+    correct = 0;
     printf("\nCurrent word: ");
     for(int i = 0; i < size; i++) {
       if (check[i]) {
@@ -98,7 +99,6 @@ int main(int argC, char * argV[]) {
       //   w++;
       // }
     }
-    win = 0;
 
     int x = 0;
     while(x < 27){
