@@ -31,7 +31,6 @@ int main(int argC, char * argV[]) {
 
   int semid = semsetup();
   srand(time(0));
-  // 
 
 //this works because
 //"When the shared memory segment is created,
@@ -173,7 +172,7 @@ int main(int argC, char * argV[]) {
     }
 
     int x = 0;
-    while(x < 27){
+    while(x < 26){
       if (wordbank[x] == guess){
         wordbank[x] = '_';
       }

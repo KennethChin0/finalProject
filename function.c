@@ -12,7 +12,7 @@
 #include <errno.h>
 #include "function.h"
 #include "time.h"
-//
+
 int counter = 0;
 
 void sighandler(int signal){
