@@ -29,14 +29,12 @@ int main(int argC, char * argV[]) {
   int semid = semsetup();
   srand(time(0));
 
-//  printf("strlen(answer) is %d\n", strlen(answer));
 //this works because
 //"When the shared memory segment is created,
 //it shall be initialized with all zero values."
   if(!strlen(answer))
     strcpy(answer, generate_word());
 
-  //strcpy(answer, "bobson");//to make it copy one single word
   int size = strlen(answer);//may need hardcoding to make sure generate_word() works
   for (int i=0; i < size; ++i) {
     check[i] = 0;
@@ -53,6 +51,25 @@ int main(int argC, char * argV[]) {
     //to get interrupt signal from player and ask player to exit instead
     signal(SIGINT, sighandler);
 
+    clear();
+    printf("\nCurrent word: ");
+    for(int i = 0; i < size; i++) {
+      if (check[i]) {
+        printf("%c", answer[i]);
+      }
+      else {
+        printf("*");
+      }
+    }
+    printf("\n");
+    printf("answer is %s\n", answer);
+    printf("Lives: %d\n", lives);
+    //draw
+    draw(lives);
+    // wordbank printing
+    printf("{%s}\n", wordbank);
+
+    //waiting for turn
     printf("waiting for your turn...\n");
     printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n");
     struct sembuf sb;
@@ -64,7 +81,7 @@ int main(int argC, char * argV[]) {
 
     clear();
 
-//if the game has been won already, then you lose
+    //if the game has been won already, then you lose
     if(*won)
       break;
 
