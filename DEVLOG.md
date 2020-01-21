@@ -30,7 +30,7 @@ Derek -- 2020-1-20 01:52:
 Shared memory implemented in checking progress for guessing word
 
 Derek -- 2020-1-20 03:08:
-Semaphore-mediated turn-taking works but breaks too easily from "Control+C"
+Semaphore-mediated turn-taking implemented, but breaks too easily from "Control+C"
 induced SIGINT
 
 Derek -- 2020-1-20 05:12:
