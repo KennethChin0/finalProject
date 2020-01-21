@@ -1,11 +1,11 @@
-Kenneth Chin, Derek Lao, Minuk Kim
+# Hangman Dev Log
+## Kenneth Chin, Derek Lao, Minuk Kim
 Systems PD4
-Hangman
 
-Kenneth -- 2019-1-02 22:50
+Kenneth -- 2019-1-02 22:50:
 Initialized repo, linked submodule, created readme, started proposal FILE
 
-Kenneth -- 2019-1-09 10:45
+Kenneth -- 2019-1-09 10:45:
 Started a template for hangman project, created lives and words.txt file
 
 Kenneth -- 2019-1-12 11:0
