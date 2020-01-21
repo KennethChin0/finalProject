@@ -9,7 +9,7 @@ Kenneth -- 2020-1-09 10:45:
 Started a template for hangman project, created lives and words.txt file
 
 Minuk -- 2020-1-09:
-Wrote the function placeholder with proper parameters
+Wrote the function placeholders with proper parameters
 
 Kenneth -- 2020-1-12 11:00:
 Made simple hangman to work (the basics)
@@ -17,7 +17,7 @@ Made simple hangman to work (the basics)
 -randomly selected word
 -determining winner and loser
 
-Derek -- 2020-1-14 10:22:
+Derek, Minuk -- 2020-1-14 10:22:
 Corrected draw() code to make the person draw more like a person
 
 Derek -- 2020-1-14 12:35:
@@ -30,10 +30,16 @@ Derek -- 2020-1-18 20:20:
 Very simple shared memory implemented with the answer
 
 Minuk -- 2020-1-19:
-Started to work on a better interface using ncurses library
+Initiated the idea of making 2-player interactive hangman
+
+Minuk -- 2020-1-19:
+Started to work on a visually catchy interface using ncurses library
 
 Derek -- 2020-1-20 01:52:
 Shared memory implemented in checking progress for guessing word
+
+Minuk -- 2020-1-20:
+Fixed the segment fault error from shared memory and semaphore
 
 Derek -- 2020-1-20 03:08:
 Semaphore-mediated turn-taking implemented, but breaks too easily from "Control+C"
