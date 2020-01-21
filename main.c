@@ -52,31 +52,20 @@ int main(int argC, char * argV[]) {
     signal(SIGINT, sighandler);
 
     clear();
-    printf("\nCurrent word: ");
-    for(int i = 0; i < size; i++) {
-      if (check[i]) {
-        printf("%c", answer[i]);
-      }
-      else {
-        printf("*");
-      }
-    }
-    printf("\n");
-    printf("answer is %s\n", answer);
-    printf("Lives: %d\n", lives);
+    printf("\nLives: %d\n", lives);
     //draw
     draw(lives);
-    // wordbank printing
-    printf("{%s}\n", wordbank);
 
     //waiting for turn
-    printf("waiting for your turn...\n");
-    printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n");
-    printf("In the event of any bug or screw up, all players press Control + C, type \"exit\" for their guess, and recompile the program\n");
+    printf("waiting for your turn...\n\n");
+    printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n\n");
+    printf("In the event of any bug or screw up, all players press Control + C, type \"exit\" for their guess, and recompile the program\n\n");
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
     semop(semid, &sb, 1);
+
+    clear();
     printf("It's now your turn!\n");
     sleep(1);
 
@@ -91,7 +80,24 @@ int main(int argC, char * argV[]) {
     //set win status back to none
     win = 0;
     //printf("debugIterationCounter is %d\n", debugIterationCounter);
-    printf("Hint: in the event of any bug or screw up, all players type \"exit\" for their guess and recompile the program\n");
+
+    clear();
+    printf("In the event of any bug or screw up, all players type \"exit\" for their guess and recompile the program\n\n");
+    printf("\nLives: %d\n", lives);
+    //draw
+    draw(lives);
+
+    printf("\n");
+    printf("Viewing begins in\n");
+    printf("3 seconds\n");
+    sleep(1);
+    printf("2 seconds\n");
+    sleep(1);
+    printf("1 second\n");
+    sleep(1);
+
+    clear();
+    //view the word progress and bank
     printf("\nCurrent word: ");
     for(int i = 0; i < size; i++) {
       if (check[i]) {
@@ -103,13 +109,16 @@ int main(int argC, char * argV[]) {
     }
     printf("\n");
     printf("answer is %s\n", answer);
+    // word bank printing
+    printf("{%s}\n", wordbank);
+    sleep(3);
 
-    printf("Lives: %d\n", lives);
-
+    //stop viewing
+    clear();
+    printf("In the event of any bug or screw up, all players type \"exit\" for their guess and recompile the program\n");
+    printf("\nLives: %d\n", lives);
     //draw
     draw(lives);
-    // wordbank printing
-    printf("{%s}\n", wordbank);
 
     // Get guess
     printf("Your Guess: ");
