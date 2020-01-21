@@ -72,6 +72,7 @@ int main(int argC, char * argV[]) {
     //waiting for turn
     printf("waiting for your turn...\n");
     printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n");
+    printf("In the event of any bug or screw up, all players press Control + C, type \"exit\" for their guess, and recompile the program\n");
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
@@ -90,6 +91,7 @@ int main(int argC, char * argV[]) {
     //set win status back to none
     win = 0;
     //printf("debugIterationCounter is %d\n", debugIterationCounter);
+    printf("Hint: in the event of any bug or screw up, all players type \"exit\" for their guess and recompile the program\n");
     printf("\nCurrent word: ");
     for(int i = 0; i < size; i++) {
       if (check[i]) {
