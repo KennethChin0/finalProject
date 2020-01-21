@@ -20,7 +20,7 @@ void sighandler(int signal){
   {
     if(counter < 3)
     {
-      printf("type \"exit\", or control+c %d more time(s) to end the program\n", 3 - counter);
+      printf("type \"exit\" for your guess, or control+c %d more time(s) to end the program\n", 3 - counter);
       counter ++;
     }
     else
