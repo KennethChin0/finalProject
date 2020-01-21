@@ -74,3 +74,6 @@ Win and lose statements finished
 Derek -- 2020-1-21 1:47:
 Finished signal handling for Control + \ induced SIGQUIT, and wrote a
 "Disaster Protocol" for how to repair the program if it breaks
+
+Derek -- 2020-1-21 3:00:
+Added a hack for the tester: type "answer123" for the guess to view the answer
