@@ -48,9 +48,9 @@ Disaster Protocol:
 1. All players press Control + C until they reach the guessing screen.
 2. All players type "exit" for their guess to exit their programs.
 3. Recompile the program using the following steps:
-...a. Type "make clean"
-...b. Type "make"
-...c. Type "make run"
+   a. Type "make clean" 
+   b. Type "make" 
+   c. Type "make run" 
 * dummy line
 
 ## Resources
