@@ -8,6 +8,9 @@ Initialized repo, linked submodule, created readme, started proposal FILE
 Kenneth -- 2020-1-09 10:45:
 Started a template for hangman project, created lives and words.txt file
 
+Minuk -- 2020-1-09:
+Wrote the function placeholder with proper parameters
+
 Kenneth -- 2020-1-12 11:00:
 Made simple hangman to work (the basics)
 -guessing
@@ -26,6 +29,9 @@ Tried to make a wordbank for the words that are already guessed
 Derek -- 2020-1-18 20:20:
 Very simple shared memory implemented with the answer
 
+Minuk -- 2020-1-19:
+Started to work on a better interface using ncurses library
+
 Derek -- 2020-1-20 01:52:
 Shared memory implemented in checking progress for guessing word
 
@@ -43,6 +49,9 @@ Shared memory implemented with guessing a random word for the answer
 
 Derek -- 2020-1-20 21:06:
 Every time a letter is guessed, the player can see their lives and word bank
+
+Minuk -- 2020-1-20:
+Created DEVLOG and formatted it.
 
 Derek -- 2020-1-20 21:15:
 Added print statements for player instructions in the event of disaster
