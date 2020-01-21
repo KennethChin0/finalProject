@@ -16,14 +16,16 @@
 
 int main(int argC, char * argV[]) {
   int bigbrain = 0;
+
   int * check;
   char * wordbank;
   char * answer;
+  int * won;//not to be confused with "win". won stores if the game has been won already
 
   int checkid = shmsetup(CHECK_KEY, (void*)&check);
   int bankid = shmsetup(BANK_KEY, (void*)&wordbank);
   int answerid = shmsetup(ANSWER_KEY, (void*)&answer);
-
+  int wonid = shmsetup(WON_KEY, (void*)&won);
   int semid = semsetup();
   srand(time(0));
 
@@ -48,21 +50,11 @@ int main(int argC, char * argV[]) {
   strcpy(wordbank, "abcdefghijklmnopqrstuvwxyz");
 
   while (lives > 0) {
-    // Check if user win
-    for(int m = 0; m < size; ++m) {
-      if (check[m] == 1) {
-        win++;
-      }
-    }
-    if (win == size){
-      break;
-    }
-
     //to get interrupt signal from player and ask player to exit instead
     signal(SIGINT, sighandler);
 
     printf("waiting for your turn...\n");
-    printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again!\n");
+    printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n");
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
@@ -71,10 +63,10 @@ int main(int argC, char * argV[]) {
     sleep(1);
 
     clear();
-    if(!correct)
-    {
-      printf("Your guess is incorrect\n");
-    }
+
+//if the game has been won already, then you lose
+    if(*won)
+      break;
 
     //set correct status back to incorrect
     correct = 0;
@@ -102,18 +94,18 @@ int main(int argC, char * argV[]) {
     // Get guess
     printf("Your Guess: ");
     char word[100];
+    char guess;
     scanf("%s", word);
     if (strlen(word) > 1) {
-      printf("here\n");
-      // break;
       if(!strcmp("exit", word))//if the user wants to force exit the game
       {
         printf("user wants to exit\n");
         break;
       }
-      else if (strcmp(word,answer) == 0){
+      else if (strcmp(word,answer) == 0){//if the whole word is guessed
         printf("winner winner chicken dinner\n");
-        bigbrain = 200;
+        bigbrain = 200;//this counts as a win
+        *won = 1;
         break;
       }
       else{
@@ -121,7 +113,8 @@ int main(int argC, char * argV[]) {
       }
     }
     else {
-    char guess = word[0];
+      guess = word[0];
+    }
 
     for(int k=0; k < size; ++k) {
       if (answer[k] == guess && !check[k]) {
@@ -138,6 +131,7 @@ int main(int argC, char * argV[]) {
       }
     }
     if (correct == 0){
+      printf("Your guess is incorrect\n");
       lives--;
     }
 
@@ -149,16 +143,20 @@ int main(int argC, char * argV[]) {
         x++;
     }
 
-    // Check if user win
-    // for(int m = 0; m < size; ++m) {
-    //   if (check[m] == 1) {
-    //     win++;
-    //   }
-    // }
-    // if (win == size){
-    //   break;
-    // }
+    // If the game has not been won already
+    if(!*won)
+    {
+      for(int m = 0; m < size; ++m) {
+        if (check[m] == 1) {
+          win++;
+        }
+      }
+      if (win == size){
+        *won = 1;
+        break;
+      }
     }
+
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     printf("Your turn has ended\n");
@@ -166,24 +164,44 @@ int main(int argC, char * argV[]) {
     debugIterationCounter ++;
   }
 
+  int gameHasBeenWon = *won;
+
   shmdt(check);
   shmctl(checkid, IPC_RMID, 0);
   shmdt(wordbank);
   shmctl(bankid, IPC_RMID, 0);
   shmdt(answer);
   shmctl(answerid, IPC_RMID, 0);
+  shmdt(won);
+  shmctl(wonid, IPC_RMID, 0);
 
   semctl(semid, IPC_RMID, 0);
 //  printf("semaphore removed!\n");
-  if(win == size)
+
+  if(win == size)//if game was won because all the letters were guessed
   {
     printf("You won!\n");
     return 0;
   }
-  //no more lives
-  if (bigbrain == 0){
-  draw(lives);
-  printf("Ran out of lives :(\n");
+
+  if(bigbrain)//if game was won because the full word was guessed, win message is in the while loop
+  {
+    return 0;
   }
+
+  if(gameHasBeenWon)
+  {
+    printf("You lost because the other player won first!\n");
+    return 0;
+  }
+
+  //no more lives but the game hasn't been won yet
+  if (bigbrain == 0){
+    draw(lives);
+    printf("Ran out of lives :(\n");
+    return 0;
+  }
+
+  //this is if bigbrain is not equal to zero, then winner winner chicken dinner is the win message
   return 0;
 }
