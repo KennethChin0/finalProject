@@ -65,7 +65,7 @@ int main(int argC, char * argV[]) {
     //waiting for turn
     printf("waiting for your turn...\n\n\n\n\n\n\n\n");
     printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n");
-    printf("If this is the case, a disaster likely occured. Follow the Disaster Protocol\n");
+    printf("If you must do this, a disaster likely occured. Follow the Disaster Protocol\n");
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
@@ -133,7 +133,7 @@ int main(int argC, char * argV[]) {
     draw(lives);
 
     // Get guess
-    printf("Your Guess: ");
+    printf("Your Guess (type a letter or a word): ");
     char word[100];
     char guess;
     scanf("%s", word);
@@ -213,7 +213,8 @@ int main(int argC, char * argV[]) {
 
   int gameHasBeenWon = *won;
   int gameHasBeenLost = *lost;
-
+  char theAnswer[100];
+  strcpy(theAnswer, answer);
   shmdt(check);
   shmctl(checkid, IPC_RMID, 0);
   shmdt(wordbank);
@@ -230,6 +231,7 @@ int main(int argC, char * argV[]) {
 
   if(win == size)//if game was won because all the letters were guessed
   {
+    printf("The answer was \"%s\"\n", theAnswer);
     printf("You won!\n");
     return 0;
   }
@@ -242,6 +244,7 @@ int main(int argC, char * argV[]) {
   if(gameHasBeenWon)
   {
     printf("You lost because the other player won first!\n");
+    printf("The answer was \"%s\"\n", theAnswer);
     return 0;
   }
 
@@ -249,14 +252,18 @@ int main(int argC, char * argV[]) {
   if (youLostAllLives){
     draw(lives);
     printf("Ran out of lives :(\n");
+    printf("The answer was \"%s\"\n", theAnswer);
     return 0;
   }
 
   if(gameHasBeenLost)
   {
     printf("You won because the other player lost all their lives\n");
+    printf("The answer was \"%s\"\n", theAnswer);
     return 0;
   }
 
+  printf("Exited for some abnormal reason\n");
+  printf("The answer was \"%s\"\n", theAnswer);
   return 0;
 }

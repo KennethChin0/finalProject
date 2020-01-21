@@ -218,5 +218,6 @@ void disasterPreventionText(){
     printf("  c. Type \"make run\"\n\n");
 
     printf("***To force exit the program (not recommended), press Control + \\ 3 times***\n\n");
-    printf("****************************************************************************************\n\n");
+    printf("******************************************************************************************\n");
+    printf("                                         HANGMAN:\n\n");
 }
