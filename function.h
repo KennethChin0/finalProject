@@ -12,6 +12,7 @@
 
 #define CHECK_KEY 123
 #define BANK_KEY 456
+#define ANSWER_KEY 789
 #define SEMKEY 67890
 #define SIZE 100
 

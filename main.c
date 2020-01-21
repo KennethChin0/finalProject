@@ -18,18 +18,22 @@ int main(int argC, char * argV[]) {
   int bigbrain = 0;
   int * check;
   char * wordbank;
+  char * answer;
 
-  void ** checkPointer = (void*)&check;
-  void ** wordbankPointer = (void*)&wordbank;
-
-  int checkid = shmsetup(CHECK_KEY, checkPointer);
-  int bankid = shmsetup(BANK_KEY, wordbankPointer);
+  int checkid = shmsetup(CHECK_KEY, (void*)&check);
+  int bankid = shmsetup(BANK_KEY, (void*)&wordbank);
+  int answerid = shmsetup(ANSWER_KEY, (void*)&answer);
   int semid = semsetup();
   srand(time(0));
 
-  char answer[100];
-  //strcpy(answer, generate_word());
-  strcpy(answer, "bobson");//to make it copy one single word
+//  printf("strlen(answer) is %d\n", strlen(answer));
+//this works because
+//"When the shared memory segment is created,
+//it shall be initialized with all zero values."
+  if(!strlen(answer))
+    strcpy(answer, generate_word());
+
+  //strcpy(answer, "bobson");//to make it copy one single word
   int size = strlen(answer);//may need hardcoding to make sure generate_word() works
   for (int i=0; i < size; ++i) {
     check[i] = 0;
