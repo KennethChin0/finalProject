@@ -44,14 +44,9 @@ void sighandler(int signal){
 
 int shmsetup(key_t key, void ** pointer){
   int shmid = shmget(key, SIZE, IPC_CREAT | IPC_EXCL | 0644);
-//  printf("shmid is %d\n", shmid);
-
   if(shmid < 0)
   {
-//    printf("can't create shared memory (likely cause: shared memory already exists)\n");
-//    printf("error %d: %s\n", errno, strerror(errno));
     shmid = shmget(key, SIZE, 0644);
-//    printf("getting existing shmid: %d\n", shmid);
   }
 
   * pointer = shmat(shmid, 0, 0);//checking array to be shared between players
@@ -60,14 +55,10 @@ int shmsetup(key_t key, void ** pointer){
 
 int semsetup(){
   int semid = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
-//  printf("semid is %d\n", semid);
   int semidExistedBefore = 0;
   if(semid < 0)
   {
-//    printf("can't create semaphore (likely cause: semaphore already exists)\n");
-//    printf("error %d: %s\n", errno, strerror(errno));
     semid = semget(SEMKEY, 1, 0644);
-//    printf("getting existing semid: %d\n", semid);
     printf("\n");
     if(semid >= 0)
       semidExistedBefore = 1;
@@ -79,21 +70,10 @@ int semsetup(){
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     int semval = semctl(semid, 0, GETVAL, 0);
-//    printf("semaphore upped to have a value of %d\n", semval);
   }
   else
   {
-//    printf("semaphore existed before, was not changed\n");
     int semval = semctl(semid, 0, GETVAL, 0);
-//    if(semval < 1)//comment this out when semaphores are ready
-//    {//comment this out when semaphores are ready
-//      struct sembuf sb;//comment this out when semaphores are ready
-//      sb.sem_num = 0;//comment this out when semaphores are ready
-//      sb.sem_op = 1;//comment this out when semaphores are ready
-//      semop(semid, &sb, 1);//comment this out when semaphores are ready
-//    }//comment this out when semaphores are ready
-//    semval = semctl(semid, 0, GETVAL, 0);//comment this out when semaphores are ready
-//    printf("semaphore has a value of %d\n", semval);
   }
   return semid;
 }
@@ -190,19 +170,6 @@ void words(char * wordbank){
   int x = 0;
   printf("{");
   printf("%s", wordbank);
-  // while(x < 6){
-  //   if (&wordbank[x] != "\0"){
-  //   printf("%s", &wordbank[x]);
-  //   x++;
-  // // }
-  //while(wordbank[x]){
-  //  printf("%s", &wordbank[x]);
-  //  x++ ;
-  //}
-  // printf("%s\n", &wordbank[0]);
-  // printf("%s\n", &wordbank[1]);
-  // printf("%s\n", &wordbank[2]);
-
   printf("}\n");
 }
 

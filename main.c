@@ -32,9 +32,9 @@ int main(int argC, char * argV[]) {
   int semid = semsetup();
   srand(time(0));
 
-//this works because
-//"When the shared memory segment is created,
-//it shall be initialized with all zero values."
+  //this works because
+  //"When the shared memory segment is created,
+  //it shall be initialized with all zero values."
   if(!strlen(answer))
     strcpy(answer, generate_word());
 
@@ -59,7 +59,8 @@ int main(int argC, char * argV[]) {
     clear();
     disasterPreventionText();
     printf("\nLives: %d\n", lives);
-    //draw
+
+    //draw the person
     draw(lives);
 
     //waiting for turn
@@ -71,6 +72,7 @@ int main(int argC, char * argV[]) {
     sb.sem_op = -1;
     semop(semid, &sb, 1);
 
+    //text to notify the player it is their turn
     clear();
     disasterPreventionText();
     printf("It's now your turn!\n");
@@ -122,6 +124,7 @@ int main(int argC, char * argV[]) {
     //printf("answer is %s\n", answer);
     // word bank printing
     printf("\n{%s}\n", wordbank);
+    printf("\n");
     printf("Viewing will end in 3 seconds (press Control + C to skip)\n");
     sleep(3);
 
@@ -143,7 +146,14 @@ int main(int argC, char * argV[]) {
         printf("user wants to exit\n");
         break;
       }
-      else if (strcmp(word,answer) == 0){//if the whole word is guessed
+      else if (!strcmp("answer123", word))//hack for the tester to see the answer
+      {
+        printf("the answer is \"%s\"\n", answer);
+        correct = 1;
+        sleep(1);
+      }
+      else if (strcmp(word,answer) == 0)//if the whole word is guessed
+      {
         printf("winner winner chicken dinner\n");
         bigbrain = 200;//this counts as a win
         *won = 1;
@@ -206,7 +216,7 @@ int main(int argC, char * argV[]) {
 
     sb.sem_op = 1;
     semop(semid, &sb, 1);
-    printf("Your turn has ended\n");
+    printf("\nYour turn has ended\n");
     sleep(1);
     debugIterationCounter ++;
   }
