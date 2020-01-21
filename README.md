@@ -48,27 +48,9 @@ Disaster Protocol:
 1. All players press Control + C until they reach the guessing screen.
 2. All players type "exit" for their guess to exit their programs.
 3. Recompile the program using the following steps:
-   Type "make clean" 
-   Type "make" 
-   Type "make run" 
-* dummy line
-
-1. First ordered list item
-2. Another item
-⋅⋅* Unordered sub-list. 
-1. Actual numbers don't matter, just that it's a number
-⋅⋅1. Ordered sub-list
-4. And another item.
-
-    You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
-
-    To have a line break without a paragraph, you will need to use two trailing spaces.  
-    Note that this line is separate, but within the same paragraph.  
-    (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
-
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
+     a. Type "make clean" 
+     b. Type "make" 
+     c. Type "make run" 
 
 ## Resources
 We used a txt file to store our words taken from Github user Xethron which can be found here:  
