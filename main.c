@@ -54,27 +54,30 @@ int main(int argC, char * argV[]) {
   while (lives > 0) {
     //to get interrupt signal from player and ask player to exit instead
     signal(SIGINT, sighandler);
+    signal(SIGQUIT, sighandler);
 
     clear();
+    disasterPreventionText();
     printf("\nLives: %d\n", lives);
     //draw
     draw(lives);
 
     //waiting for turn
-    printf("waiting for your turn...\n\n");
-    printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n\n");
-    printf("In the event of any bug or screw up, all players press Control + C, type \"exit\" for their guess, and recompile the program\n\n");
+    printf("waiting for your turn...\n\n\n\n\n\n\n\n");
+    printf("Hint: If you get stuck on this screen, press Control + C to get yourself moving again\n");
+    printf("If this is the case, a disaster likely occured. Follow the Disaster Protocol\n");
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
     semop(semid, &sb, 1);
 
     clear();
+    disasterPreventionText();
     printf("It's now your turn!\n");
     sleep(1);
 
     clear();
-
+    disasterPreventionText();
     //if the game has been lost already, then you win
     if(*lost)
       break;
@@ -89,21 +92,22 @@ int main(int argC, char * argV[]) {
     //printf("debugIterationCounter is %d\n", debugIterationCounter);
 
     clear();
-    printf("In the event of any bug or screw up, all players type \"exit\" for their guess and recompile the program\n\n");
+    disasterPreventionText();
     printf("\nLives: %d\n", lives);
     //draw
     draw(lives);
-
     printf("\n");
-    printf("Viewing begins in\n");
-    printf("3 seconds\n");
-    sleep(1);
-    printf("2 seconds\n");
-    sleep(1);
-    printf("1 second\n");
-    sleep(1);
+    printf("Viewing begins in 3 seconds (press Control + C to skip)\n");
+    sleep(3);
+    //printf("3 seconds\n");
+    //sleep(1);
+    //printf("2 seconds\n");
+    //sleep(1);
+    //printf("1 second\n");
+    //sleep(1);
 
     clear();
+    disasterPreventionText();
     //view the word progress and bank
     printf("\nCurrent word: ");
     for(int i = 0; i < size; i++) {
@@ -118,11 +122,12 @@ int main(int argC, char * argV[]) {
     //printf("answer is %s\n", answer);
     // word bank printing
     printf("\n{%s}\n", wordbank);
+    printf("Viewing will end in 3 seconds (press Control + C to skip)\n");
     sleep(3);
 
     //stop viewing
     clear();
-    printf("In the event of any bug or screw up, all players type \"exit\" for their guess and recompile the program\n");
+    disasterPreventionText();
     printf("\nLives: %d\n", lives);
     //draw
     draw(lives);

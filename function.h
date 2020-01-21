@@ -35,3 +35,5 @@ char* generate_word();
 char **  parse_args( char * line );
 
 void words(char * wordbank);
+
+void disasterPreventionText();

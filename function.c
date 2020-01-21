@@ -16,18 +16,29 @@
 int counter = 0;
 
 void sighandler(int signal){
-  if(signal == SIGINT)
+  if(signal == SIGQUIT)
   {
     if(counter < 3)
     {
-      printf("type \"exit\" for your guess, or control+c %d more time(s) to end the program\n", 3 - counter);
+      printf("Warning! You are trying to force end the program!\n");
+      printf("This may cause a disaster!\n");
+      printf("To end the program safely, follow Disaster Protocol until step 2\n");
+      printf("Press Control + \\ %d more time(s) to force end the program\n", 3 - counter);
       counter ++;
     }
     else
     {
+      printf("You are about to force end the program.\n");
+      printf("This creates a disaster.\n");
+      printf("To obtain protocol for repairing a disaster,\n");
+      printf("Type \"make run\"\n");
       int status;
       exit(status);
     }
+  }
+  else if(signal == SIGINT)
+  {
+    printf("If you are trying to exit the program, type \"exit\" for your guess\n");
   }
 }
 
@@ -193,4 +204,19 @@ void words(char * wordbank){
   // printf("%s\n", &wordbank[2]);
 
   printf("}\n");
+}
+
+void disasterPreventionText(){
+   printf("To properly exit the program, follow Disaster Protocol to step 2.\n\n");
+
+    printf("Disaster Protocol:\n");
+    printf("1. All players press Control + C until they reach the guessing screen.\n");
+    printf("2. All players type \"exit\" for their guess to exit their programs.\n");
+    printf("3. Recompile the program using the following steps:\n");
+    printf("  a. Type \"make clean\"\n");
+    printf("  b. Type \"make\"\n");
+    printf("  c. Type \"make run\"\n\n");
+
+    printf("***To force exit the program (not recommended), press Control + \\ 3 times***\n\n");
+    printf("****************************************************************************************\n\n");
 }
