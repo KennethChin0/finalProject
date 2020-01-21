@@ -24,6 +24,6 @@ terminals. Instructions on how to play will be displayed. Take turns guess the
 work against another player.
 
 
-##Resources
+## Resources
 We used a txt file to store our words taken from Github user Xethron which can be found here:  
 'https://github.com/Xethron/Hangman/blob/master/words.txt'
