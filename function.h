@@ -14,6 +14,8 @@
 #define BANK_KEY 456
 #define ANSWER_KEY 789
 #define WON_KEY 012
+#define LOST_KEY 345
+
 #define SEMKEY 67890
 #define SIZE 100
 

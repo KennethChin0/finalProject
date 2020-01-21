@@ -17,15 +17,18 @@
 int main(int argC, char * argV[]) {
   int bigbrain = 0;
 
-  int * check;
+  int * check;//array same size of answer to check the progress on guessing the word
   char * wordbank;
   char * answer;
   int * won;//not to be confused with "win". won stores if the game has been won already
+  int * lost;
 
   int checkid = shmsetup(CHECK_KEY, (void*)&check);
   int bankid = shmsetup(BANK_KEY, (void*)&wordbank);
   int answerid = shmsetup(ANSWER_KEY, (void*)&answer);
   int wonid = shmsetup(WON_KEY, (void*)&won);
+  int lostid = shmsetup(LOST_KEY, (void*)&lost);
+
   int semid = semsetup();
   srand(time(0));
 
@@ -44,6 +47,7 @@ int main(int argC, char * argV[]) {
   int win = 0;//check win status
   int correct = 1;//correct status of guess
   int w = 0;//wordbank index
+  int youLostAllLives = 0;//special integer to check if you lost from losing all your lives
   int debugIterationCounter = 0;
   strcpy(wordbank, "abcdefghijklmnopqrstuvwxyz");
 
@@ -71,6 +75,9 @@ int main(int argC, char * argV[]) {
 
     clear();
 
+    //if the game has been lost already, then you win
+    if(*lost)
+      break;
     //if the game has been won already, then you lose
     if(*won)
       break;
@@ -108,9 +115,9 @@ int main(int argC, char * argV[]) {
       }
     }
     printf("\n");
-    printf("answer is %s\n", answer);
+    //printf("answer is %s\n", answer);
     // word bank printing
-    printf("{%s}\n", wordbank);
+    printf("\n{%s}\n", wordbank);
     sleep(3);
 
     //stop viewing
@@ -186,6 +193,12 @@ int main(int argC, char * argV[]) {
       }
     }
 
+    if(!lives)
+    {
+      *lost = 1;
+      youLostAllLives = 1;
+    }
+
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     printf("Your turn has ended\n");
@@ -194,6 +207,7 @@ int main(int argC, char * argV[]) {
   }
 
   int gameHasBeenWon = *won;
+  int gameHasBeenLost = *lost;
 
   shmdt(check);
   shmctl(checkid, IPC_RMID, 0);
@@ -203,6 +217,8 @@ int main(int argC, char * argV[]) {
   shmctl(answerid, IPC_RMID, 0);
   shmdt(won);
   shmctl(wonid, IPC_RMID, 0);
+  shmdt(lost);
+  shmctl(lostid, IPC_RMID, 0);
 
   semctl(semid, IPC_RMID, 0);
 //  printf("semaphore removed!\n");
@@ -225,12 +241,17 @@ int main(int argC, char * argV[]) {
   }
 
   //no more lives but the game hasn't been won yet
-  if (bigbrain == 0){
+  if (youLostAllLives){
     draw(lives);
     printf("Ran out of lives :(\n");
     return 0;
   }
 
-  //this is if bigbrain is not equal to zero, then winner winner chicken dinner is the win message
+  if(gameHasBeenLost)
+  {
+    printf("You won because the other player lost all their lives\n");
+    return 0;
+  }
+
   return 0;
 }
