@@ -70,3 +70,7 @@ Minor fixes to bugs and small things such as print statements and spacing
 
 Derek -- 2020-1-20 23:34:
 Win and lose statements finished
+
+Derek -- 2020-1-21 1:47:
+Finished signal handling for Control + \ induced SIGQUIT, and wrote a
+"Disaster Protocol" for how to repair the program if it breaks
