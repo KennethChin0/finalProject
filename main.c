@@ -25,8 +25,12 @@ int main(int argC, char * argV[]) {
   int bigbrain = 0;
   int * check;
   char * wordbank;
-  int checkid = shmsetup(CHECK_KEY, &check);
-  int bankid = shmsetup(BANK_KEY, &wordbank);
+
+  void ** checkPointer = &check;
+  void ** wordbankPointer = &wordbank;
+
+  int checkid = shmsetup(CHECK_KEY, checkPointer);
+  int bankid = shmsetup(BANK_KEY, wordbankPointer);
   int semid = semsetup();
   srand(time(0));
 
