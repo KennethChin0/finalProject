@@ -52,7 +52,9 @@ Disaster Protocol:
      a. Type "make clean"  
      b. Type "make"  
      c. Type "make run"  
-* dummy line
+
+## Hack for the tester to view the answer
+When you reach the guess screen, type "answer123" to view the answer.
 
 ## Resources
 We used a txt file to store our words taken from Github user Xethron which can be found here:  
