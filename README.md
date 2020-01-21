@@ -11,11 +11,15 @@
 
 ## Description of Project  
 We are making our attempt of creating the popular child's game hangman.
-The objective of the game is to guess a word that sthe computer randomly generates. The
+The objective of the game is to guess a word that the computer randomly generates. The
 guessers guess a letter each turn. If the letter is part of the word, the
 position the letter is in the word is shown, else a part of a drawing of a stick
-figure is drawn (representative of certain number of lives). Our game is two players so each 
-player will take turns guessing, who ever guess first wins!
+figure is drawn (representative of certain number of lives). 
+But there is a twist! During their turns, players only have 3 seconds to
+view the word bank and the progress on guessing the word.
+
+Our game is two players so each player will take turns guessing, the player to guess 
+the word first or run out of lives last wins.
 
 ## Technical Design:
 - Working with files: Obtain word from text file to be used for the game
