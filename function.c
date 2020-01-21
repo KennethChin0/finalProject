@@ -97,13 +97,11 @@ void clear(){
   }
   else if(child == 0)
   {
-    printf("I'm with stupid, %d\n", getpid());
     execvp("clear", args);
     exit(*status);
   }
   else if(child > 0)
   {
-    printf("I'm with smartass, %d\n", getpid());
     wait(status);
   }
 
@@ -154,9 +152,11 @@ char * generate_word(){
     fgets(line, 1024, f);
   }
   char * word = line;
-  int x = strlen(word) - 1;
+  int x = strlen(word) - 2;//this is supposed to be strlen(word) - 1 but it is hardcoded because for some reason it won't work
   word[x] = '\0';
+  printf("while inside generate_word\n");
   printf("%s\n", word);
+  printf("strlen(word) is %ld\n", strlen(word));
   fclose(f);
   return word;
 }

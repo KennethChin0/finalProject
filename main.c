@@ -23,6 +23,7 @@ int main(int argC, char * argV[]) {
   int checkid = shmsetup(CHECK_KEY, (void*)&check);
   int bankid = shmsetup(BANK_KEY, (void*)&wordbank);
   int answerid = shmsetup(ANSWER_KEY, (void*)&answer);
+
   int semid = semsetup();
   srand(time(0));
 
@@ -166,13 +167,12 @@ int main(int argC, char * argV[]) {
   }
 
   shmdt(check);
-//  printf("check shared memory detached!\n");
-  shmdt(wordbank);
-//  printf("wordbank shared memory detached!\n");
   shmctl(checkid, IPC_RMID, 0);
-//  printf("check shared memory removed!\n");
+  shmdt(wordbank);
   shmctl(bankid, IPC_RMID, 0);
-//  printf("bank shared memory removed!\n");
+  shmdt(answer);
+  shmctl(answerid, IPC_RMID, 0);
+
   semctl(semid, IPC_RMID, 0);
 //  printf("semaphore removed!\n");
   if(win == size)
