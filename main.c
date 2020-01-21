@@ -13,13 +13,6 @@
 #include "function.h"
 #include <time.h>
 //#include <graphics.h>
-//d
-
-// int * check;
-// char * wordbank;
-// int checkid = shmsetup(CHECK_KEY, &check);
-// int bankid = shmsetup(BANK_KEY, &wordbank);
-
 
 int main(int argC, char * argV[]) {
   int bigbrain = 0;
@@ -82,7 +75,7 @@ int main(int argC, char * argV[]) {
     correct = 0;
     //set win status back to none
     win = 0;
-    printf("debugIterationCounter is %d\n", debugIterationCounter);
+    //printf("debugIterationCounter is %d\n", debugIterationCounter);
     printf("\nCurrent word: ");
     for(int i = 0; i < size; i++) {
       if (check[i]) {
@@ -108,7 +101,12 @@ int main(int argC, char * argV[]) {
     if (strlen(word) > 1) {
       printf("here\n");
       // break;
-      if (strcmp(word,answer) == 0){
+      if(!strcmp("exit", word))//if the user wants to force exit the game
+      {
+        printf("user wants to exit\n");
+        break;
+      }
+      else if (strcmp(word,answer) == 0){
         printf("winner winner chicken dinner\n");
         bigbrain = 200;
         break;
@@ -119,12 +117,6 @@ int main(int argC, char * argV[]) {
     }
     else {
     char guess = word[0];
-    //if user wants to exit
-    if(!strcmp("exit", word))
-    {
-      printf("user wants to exit\n");
-      break;
-    }
 
     for(int k=0; k < size; ++k) {
       if (answer[k] == guess && !check[k]) {
@@ -167,20 +159,18 @@ int main(int argC, char * argV[]) {
     printf("Your turn has ended\n");
     sleep(1);
     debugIterationCounter ++;
-
-
   }
 
   shmdt(check);
-  printf("check shared memory detached!\n");
+//  printf("check shared memory detached!\n");
   shmdt(wordbank);
-  printf("wordbank shared memory detached!\n");
+//  printf("wordbank shared memory detached!\n");
   shmctl(checkid, IPC_RMID, 0);
-  printf("check shared memory removed!\n");
+//  printf("check shared memory removed!\n");
   shmctl(bankid, IPC_RMID, 0);
-  printf("bank shared memory removed!\n");
+//  printf("bank shared memory removed!\n");
   semctl(semid, IPC_RMID, 0);
-  printf("semaphore removed!\n");
+//  printf("semaphore removed!\n");
   if(win == size)
   {
     printf("You won!\n");
