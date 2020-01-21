@@ -19,8 +19,8 @@ int main(int argC, char * argV[]) {
   int * check;
   char * wordbank;
 
-  void ** checkPointer = &check;
-  void ** wordbankPointer = &wordbank;
+  void ** checkPointer = (void*)&check;
+  void ** wordbankPointer = (void*)&wordbank;
 
   int checkid = shmsetup(CHECK_KEY, checkPointer);
   int bankid = shmsetup(BANK_KEY, wordbankPointer);
