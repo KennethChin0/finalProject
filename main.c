@@ -86,9 +86,10 @@ int main(int argC, char * argV[]) {
     printf("answer is %s\n", answer);
 
     printf("Lives: %d\n", lives);
+
     //draw
     draw(lives);
-    // words(wordbank);
+    // wordbank printing
     printf("{%s}\n", wordbank);
 
     // Get guess
