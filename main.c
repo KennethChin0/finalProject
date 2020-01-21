@@ -32,38 +32,6 @@ int main(int argC, char * argV[]) {
   int semid = semsetup();
   srand(time(0));
   // 
-  // ITEM **my_items;
-  // 	int c;
-  // 	MENU *my_menu;
-  //         int n_choices, i;
-  // 	ITEM *cur_item;
-  //
-  // 	/* Initialize curses */
-  // 	initscr();
-  // 	start_color();
-  //         cbreak();
-  //         noecho();
-  // 	keypad(stdscr, TRUE);
-  // 	init_pair(1, COLOR_RED, COLOR_BLACK);
-  // 	init_pair(2, COLOR_GREEN, COLOR_BLACK);
-  // 	init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
-  //
-  // 	/* Initialize items */
-  //   n_choices = ARRAY_SIZE(choices);
-  //   my_items = (ITEM **)calloc(n_choices + 1, sizeof(ITEM *));
-  //   for(i = 0; i < n_choices; ++i)
-  //         my_items[i] = new_item(choices[i], choices[i]);
-  // 	my_items[n_choices] = (ITEM *)NULL;
-  // 	item_opts_off(my_items[3], O_SELECTABLE);
-  // 	item_opts_off(my_items[6], O_SELECTABLE);
-  //
-  // 	/* Create menu */
-  // 	my_menu = new_menu((ITEM **)my_items);
-  //
-  // 	/* Set fore ground and back ground of the menu */
-  // 	set_menu_fore(my_menu, COLOR_PAIR(1) | A_REVERSE);
-  // 	set_menu_back(my_menu, COLOR_PAIR(2));
-  // 	set_menu_grey(my_menu, COLOR_PAIR(3));
 
 //this works because
 //"When the shared memory segment is created,
