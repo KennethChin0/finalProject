@@ -51,7 +51,7 @@ Disaster Protocol:
 ...a. Type "make clean"
 ...b. Type "make"
 ...c. Type "make run"
-
+* dummy line
 
 ## Resources
 We used a txt file to store our words taken from Github user Xethron which can be found here:  
